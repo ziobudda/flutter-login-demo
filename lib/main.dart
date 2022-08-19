@@ -78,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  double windowWidth = 0;
 
   @override
   void dispose() {
@@ -96,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -103,115 +105,88 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Container(
-          padding: EdgeInsets.all(20),
-          width: 600,
-          child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              /*TextField(
-                controller: usernameController,
-                showCursor: true,
-                decoration: InputDecoration(
-                  labelText: "Username", //babel text
-                  hintText: "Enter your email", //hint text
-                  prefixIcon: Icon(Icons.people), //prefix iocn
-                  hintStyle: TextStyle(
-                    fontSize: 13,
-                  ),
-                  labelStyle: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              */
-              Card(
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Email", //babel text
-                      labelStyle: TextStyle(
-                        fontSize: 13,
-                        color: Color.fromRGBO(93, 93, 93, 0.5),
-                        fontWeight: FontWeight.w600,
-                      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Container(
+            width: 600,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                WindowSizeTexts(),
+                SizedBox(height: 20),
+                Card(
+                  elevation: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
                     ),
-                    controller: usernameController,
-                    showCursor: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                  ),
-                ),
-              ),
-              Card(
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Password", //babel text
-                      labelStyle: TextStyle(
-                        fontSize: 13,
-                        color: Color.fromRGBO(93, 93, 93, 1),
-                        fontWeight: FontWeight.w600,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        labelText: "Email", //babel text
+                        labelStyle: TextStyle(
+                          fontSize: 13,
+                          color: Color.fromRGBO(93, 93, 93, 0.5),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
+                      controller: usernameController,
+                      showCursor: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
                     ),
-                    controller: passwordController,
-                    showCursor: true,
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                  child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal:
-                        (MediaQuery.of(context).size.width > 300) ? 100 : 10,
+                Card(
+                  elevation: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        labelText: "Password", //babel text
+                        labelStyle: TextStyle(
+                          fontSize: 13,
+                          color: Color.fromRGBO(93, 93, 93, 1),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      controller: passwordController,
+                      showCursor: true,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                    ),
                   ),
                 ),
-                onPressed: () {},
-                child: Text('Login'),
-              )),
-              SizedBox(
-                height: 20,
-              ),
-              (MediaQuery.of(context).size.width > 300)
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: bottomLinks(false))
-                  : Column(children: bottomLinks(true)),
-            ],
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                    child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal:
+                          (MediaQuery.of(context).size.width > 300) ? 100 : 10,
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Text('Login'),
+                )),
+                SizedBox(
+                  height: 20,
+                ),
+                (MediaQuery.of(context).size.width > 300)
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: bottomLinks(false))
+                    : Column(children: bottomLinks(true)),
+              ],
+            ),
           ),
         ),
       ),
@@ -255,5 +230,28 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
     ];
+  }
+}
+
+class WindowSizeTexts extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    double windowWidth = MediaQuery.of(context).size.width;
+    print("dentro WindowSizeTexts build");
+    return (MediaQuery.of(context).size.width > 300)
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text("Window W: ${MediaQuery.of(context).size.width}"),
+              Text("Window H: ${MediaQuery.of(context).size.height}"),
+            ],
+          )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text("Window W: ${MediaQuery.of(context).size.width}"),
+              Text("Window H: ${MediaQuery.of(context).size.height}"),
+            ],
+          );
   }
 }
